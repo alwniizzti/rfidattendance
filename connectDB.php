@@ -11,5 +11,5 @@ if ($conn->connect_error) {
     die("Database Connection failed: " . $conn->connect_error);
 }
 
-$sql_alter = "ALTER TABLE `users_logs` ADD COLUMN `status` INT(1) NOT NULL DEFAULT '0'";
-$conn->query($sql_alter);
+// $sql_alter = "ALTER TABLE `users_logs` ADD COLUMN `status` INT(1) NOT NULL DEFAULT '0'";
+// $conn->query($sql_alter);
