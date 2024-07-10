@@ -20,7 +20,7 @@ tbody button {
 }
 tbody button:hover {
   cursor: pointer;
-  border-bottom: 2px solid #3e9ba8;
+  border-bottom: 2px solid ##cf962c;
   color: black;
 }
 th{
@@ -132,7 +132,7 @@ td{
   cursor: pointer;
 }
 .form-style-5 .number {
-  background: #388994;
+  background: #cf962c;
   color: #fff;
   height: 30px;
   width: 30px;
@@ -151,7 +151,7 @@ td{
   padding: 10px 39px 10px 39px;
   color: #FFF;
   margin: 0 auto;
-  background: #388994;
+  background: #cf962c;
   font-size: 16px;
   text-align: center;
   font-style: normal;
@@ -161,7 +161,7 @@ td{
   margin-bottom: 10px;
 }
 .form-style-5 button:hover {
-  background: #3f9aa6;
+  background: #cf962c;
   cursor: pointer;
 }
 .form-style-5 .alert_user {
