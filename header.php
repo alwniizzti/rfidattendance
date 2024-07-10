@@ -5,6 +5,9 @@
 	<link rel="stylesheet" type="text/css" href="css/header.css"/>
 </head>
 <header>
+<div class="text-center">
+	<img src="img/logo/logo unisel.png" alt="" width="300" height="150"> 
+</div>
 <div class="header">
 	<div class="logo">
 		<a href="index.php">Hostel Management</a>
