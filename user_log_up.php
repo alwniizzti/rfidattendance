@@ -97,10 +97,11 @@ session_start();
         mysqli_stmt_execute($result);
         $resultl = mysqli_stmt_get_result($result);
         if (mysqli_num_rows($resultl) > 0) {
+          $i = 1;
           while ($row = mysqli_fetch_assoc($resultl)) {
       ?>
             <TR>
-              <TD><?php echo $row['id']; ?></TD>
+              <TD><?php echo $i++; ?></TD>
               <TD><?php echo $row['username']; ?></TD>
               <TD><?php echo $row['serialnumber']; ?></TD>
               <TD><?php echo $row['card_uid']; ?></TD>

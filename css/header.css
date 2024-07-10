@@ -59,7 +59,7 @@ header, main {
 
 .topnav {
   overflow: hidden;
-  background-color: #737373;
+  background-color: #f36b10;
 }
 
 .topnav a {
@@ -73,7 +73,7 @@ header, main {
 }
 
 .topnav a:hover {
-  background-color: #20a1ac;
+  background-color: #515353;
   color: black;
 }
 
@@ -111,8 +111,8 @@ header, main {
     width: 90% !important;
   }
 }	
-tbody tr:nth-child(even){background-color: #388994;}
-tbody tr:nth-child(odd){background-color: #3f9aa6;}
+tbody tr:nth-child(even){background-color: #cf962c;}
+tbody tr:nth-child(odd){background-color: #cf962c;}
 
 tbody tr:hover {opacity: 0.8;}
 
@@ -128,13 +128,13 @@ span.psw {
   color: #fff !important;
 }
 .modal-header, .modal-footer {
-  background-color: #388994 !important;
+  background-color: #F96127 !important;
   border: none !important;
   color: #fff !important;
 }
 
 .modal-body {
-  background-color: #3f9aa6 !important;
+  background-color: #F96127 !important;
 }
 
 .modal-body input[type="text"],
@@ -202,4 +202,13 @@ span.psw {
   margin-right: 20px;
   text-align: center;
   position: absolute;
+}
+
+.btn-success {
+  background-color: #515353;
+  border: #000000;
+}
+
+.btn-success:hover {
+  background-color: #6c757d; /* Change this to the color you want on hover */
 }

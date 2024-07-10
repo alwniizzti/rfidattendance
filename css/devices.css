@@ -27,13 +27,13 @@ section {
 	margin: 20px auto;
 }
 .panel {
-  border-color: #388994 !important;
+  border-color: #F96127 !important;
 }
 .panel-heading {
-  background-color: #388994 !important;
+  background-color: #F96127 !important;
 }
 .panel-body {
-  background-color: #46abb9 !important;
+  background-color: #e29e1f !important;
 }
 
 .mode_select {
@@ -50,7 +50,7 @@ section {
 }
 
 .mode_select label {
-  background-color: #46abb9;
+  background-color: #737373;
   color: #000;
   font-size: 14px;
   line-height: 1;

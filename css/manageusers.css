@@ -20,7 +20,7 @@ tbody button {
 }
 tbody button:hover {
   cursor: pointer;
-  border-bottom: 2px solid ##cf962c;
+  border-bottom: 2px solid #cf962c;
   color: black;
 }
 th{
@@ -125,7 +125,7 @@ td{
 .form-style-5 input[type="email"]:hover,
 .form-style-5 input[type="number"]:hover,
 .form-style-5 input[type="time"]:hover {
-  border: 1px solid #388994;
+  border: 1px solid #D94C1A;
 }
 .form-style-5 select:hover,
 .form-style-5 input[type="radio"]:hover {

@@ -8,7 +8,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
 <html>
 
 <head>
-  <title>Users Logs</title>
+ <title>Users Logs</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="icon" type="image/png" href="icon/ok_check.png"> -->
@@ -115,7 +115,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
     <!--User table-->
     <h1 class="slideInDown animated">Here are the Users daily logs</h1>
     <div class="form-style-5">
-      <button type="button" data-toggle="modal" data-target="#Filter-export">Log Filter/ Export to Excel</button>
+      <!-- <button type="button" data-toggle="modal" data-target="#Filter-export">Log Filter/ Export to Excel</button> -->
       <!-- SOUND BUTTON -->
       <div class="sound">
         <input type="hidden" id="sound_status" value="0">
