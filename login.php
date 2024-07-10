@@ -1,104 +1,123 @@
+<?php require_once 'config/db.php'; ?>
 <?php
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
 
-if (isset($_SESSION['Admin-name'])) {
-  header("location: index.php");
+  if (empty($username)) {
+    $errors['username'] = 'Username is required';
+  }
+
+  if (empty($password)) {
+    $errors['password'] = 'Password is required';
+  }
+
+  if (empty($errors)) {
+    $sql_admin = "SELECT * FROM `admin` WHERE `admin_email`= '$username'";
+    $result_admin = mysqli_query($conn, $sql_admin);
+
+    $sql_guard = "SELECT * FROM `guard` WHERE `guard_email`= '$username'";
+    $result_guard = mysqli_query($conn, $sql_guard);
+    if ($result_admin->num_rows > 0 || $result_guard->num_rows > 0) {
+      $_SESSION['user'] = $user;
+      if (isset($_POST['remember'])) {
+        setcookie('user_id', $user['user_id'], time() + (86400 * 30), '/');
+        setcookie('user_username', $user['user_username'], time() + (86400 * 30), '/');
+        setcookie('user_password', $password, time() + (86400 * 30), '/');
+      } else {
+        setcookie('user_id', '', time() - 3600, '/');
+        setcookie('user_username', '', time() - 3600, '/');
+        setcookie('user_password', '', time() - 3600, '/');
+      }
+      if ($result_admin->num_rows > 0) {
+        redirect(base_url('admin/index.php'));
+      } elseif ($result_guard->num_rows > 0) {
+        redirect(base_url('guard/index.php'));
+      }
+    } else {
+      $errors['username'] = 'Username not found';
+    }
+  }
 }
 ?>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-    <title>Log In</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-    <script src="js/jquery-2.2.3.min.js"></script>
-    <script>
-      $(window).on("load resize ", function() {
-          var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-          $('.tbl-header').css({'padding-right':scrollWidth});
-      }).resize();
-    </script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $(document).on('click', '.message', function(){
-          $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-          $('h1').animate({height: "toggle", opacity: "toggle"}, "slow");
-        });
-      });
-    </script>
+  <title><?= SITE_NAME ?> | Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/plugins/bootstrap/css/bootstrap.min.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/dist/css/login.css') ?>">
+  <style>
+    .logo-custom {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: 50px;
+    }
+  </style>
 </head>
+
 <body>
-<?php include'header.php'; ?> 
-<main>
-  <h1 class="slideInDown animated">Please, Login with the Admin E-mail and Password</h1>
-  <h1 class="slideInDown animated" id="reset">Please, Enter your Email to send the reset password link</h1>
-<!-- Log In -->
-<section>
-  <div class="slideInDown animated">
-    <div class="login-page">
-      <div class="form">
-        <?php  
-          if (isset($_GET['error'])) {
-            if ($_GET['error'] == "invalidEmail") {
-                echo '<div class="alert alert-danger">
-                        This E-mail is invalid!!
-                      </div>';
-            }
-            elseif ($_GET['error'] == "sqlerror") {
-                echo '<div class="alert alert-danger">
-                        There a database error!!
-                      </div>';
-            }
-            elseif ($_GET['error'] == "wrongpassword") {
-                echo '<div class="alert alert-danger">
-                        Wrong password!!
-                      </div>';
-            }
-            elseif ($_GET['error'] == "nouser") {
-                echo '<div class="alert alert-danger">
-                        This E-mail does not exist!!
-                      </div>';
-            }
-          }
-          if (isset($_GET['reset'])) {
-            if ($_GET['reset'] == "success") {
-                echo '<div class="alert alert-success">
-                        Check your E-mail!
-                      </div>';
-            }
-          }
-          if (isset($_GET['account'])) {
-            if ($_GET['account'] == "activated") {
-                echo '<div class="alert alert-success">
-                        Please Login
-                      </div>';
-            }
-          }
-          if (isset($_GET['active'])) {
-            if ($_GET['active'] == "success") {
-                echo '<div class="alert alert-success">
-                        The activation like has been sent!
-                      </div>';
-            }
-          }
-        ?>
-        <div class="alert1"></div>
-        <form class="reset-form" action="reset_pass.php" method="post" enctype="multipart/form-data">
-          <input type="email" name="email" placeholder="E-mail..." required/>
-          <button type="submit" name="reset_pass">Reset</button>
-          <p class="message"><a href="#">LogIn</a></p>
-        </form>
-        <form class="login-form" action="ac_login.php" method="post" enctype="multipart/form-data">
-          <input type="email" name="email" id="email" placeholder="E-mail..." required/>
-          <input type="password" name="pwd" id="pwd" placeholder="Password" required/>
-          <button type="submit" name="login" id="login">login</button>
-          <p class="message">Forgot your Password? <a href="#">Reset your password</a></p>
-        </form>
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+          <h2 class="heading-section"><?= SITE_NAME ?></h2>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-10">
+          <div class="wrap d-md-flex">
+            <div class="img logo-custom">
+              <img src="<?= base_url('assets/dist/img/logo/logo-unisel.png') ?>" alt="background image" style="width: 300px; height: 150px;">
+            </div>
+            <div class="login-wrap p-4 p-md-5">
+              <div class="d-flex">
+                <div class="w-100">
+                  <h3 class="mb-4">Sign In</h3>
+                </div>
+              </div>
+              <?= display_flash_message() ?>
+              <form action="" class="signin-form" method="post">
+                <div class="form-group mb-3">
+                  <label class="label" for="name">Username</label>
+                  <input type="text" class="form-control <?= isset($errors['username']) ? 'is-invalid' : '' ?>" name="username" placeholder="Username" value="<?= $_POST['username'] ?? $_COOKIE['user_username'] ?? '' ?>">
+                  <div class="invalid-feedback"><?= $errors['username'] ?? '' ?></div>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="label" for="password">Password</label>
+                  <input type="password" class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>" name="password" placeholder="Password" value="<?= $_COOKIE['user_password'] ?? '' ?>">
+                  <div class="invalid-feedback"><?= $errors['password'] ?? '' ?></div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+                </div>
+                <div class="form-group d-md-flex">
+                  <div class="w-50 text-left">
+                    <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                      <input type="checkbox" name="remember" <?= isset($_COOKIE['user_id']) ? 'checked' : '' ?>>
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="w-50 text-md-right">
+                    <a href="forgot-password.php">Forgot Password</a>
+                  </div>
+                </div>
+              </form>
+              <!-- <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Sign Up</a></p> -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-</main>
+  </section>
+  <script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
+  <script src="<?= base_url('assets/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
 </body>
+
 </html>
