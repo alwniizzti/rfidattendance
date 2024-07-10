@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'connectDB.php';
 if (!isset($_SESSION['Admin-name'])) {
 	header("location: login.php");
 }
@@ -70,7 +70,6 @@ if (!isset($_SESSION['Admin-name'])) {
 									<select class="dev_sel" name="dev_sel" id="dev_sel" style="color: #000;">
 										<option value="0">Departments</option>
 										<?php
-										require 'connectDB.php';
 										$sql = "SELECT * FROM devices ORDER BY device_name ASC";
 										$result = mysqli_stmt_init($conn);
 										if (!mysqli_stmt_prepare($result, $sql)) {
@@ -97,16 +96,16 @@ if (!isset($_SESSION['Admin-name'])) {
 					</div>
 				</div>
 				<div class="col-lg-6">
-				<div class="slideInRight animated">
-				<div class="mt-5 pt-3" id="manage_users"></div>
-			</div>
+					<div class="slideInRight animated">
+						<div class="mt-5 pt-3" id="manage_users"></div>
+					</div>
 				</div>
 			</div>
 
 		</div>
 
 
-		
+
 	</main>
 </body>
 

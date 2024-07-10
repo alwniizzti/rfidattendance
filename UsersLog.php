@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'connectDB.php';
 if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
   header("location: login.php");
 }
@@ -8,12 +8,11 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
 <html>
 
 <head>
- <title>Users Logs</title>
+  <title>Users Logs</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="icon" type="image/png" href="icon/ok_check.png"> -->
   <link rel="stylesheet" type="text/css" href="css/userslog.css">
-
   <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="js/bootbox.min.js"></script>
@@ -28,6 +27,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
     }).resize();
   </script>
   <script>
+    var statusPlay = 0;
     $(document).ready(function() {
       $.ajax({
         url: "user_log_up.php",
@@ -49,33 +49,6 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
         }).done(function(data) {
           $('#userslog').html(data);
         });
-      }, 5000);
-    });
-  </script>
-
-  <script>
-    var statusPlay = 0;
-    $(document).ready(function() {
-      // $.ajax({
-      //   // status: 1,
-      //   url: "user-log-request.php",
-      //   type: 'POST',
-      //   datatype: 'json',
-      //   success: function(response) {
-      //     if (response == 1) {
-      //       var audio = new Audio('sound/beep-07.mp3');
-      //       audio.play();
-      //       statusPlay = 1;
-      //       document.getElementById("sound").innerHTML = "Stop";
-      //     } else {
-      //       statusPlay = 0;
-      //       document.getElementById("sound").innerHTML = "Play";
-      //     }
-      //   }
-      // });
-
-      // make it interval to check every 5 seconds
-      setInterval(function() {
         $.ajax({
           url: "user-log-request.php",
           type: 'POST',
@@ -83,7 +56,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
           success: function(response) {
             if (statusPlay == 1) {
               if (response.total > 0) {
-                var audio = new Audio('sound/sound.mp3');
+                var audio = new Audio('sound/accept.mp3');
                 audio.play();
               }
             } else {
@@ -93,9 +66,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
           }
         });
       }, 1000);
-
     });
-
 
     function play() {
       if (statusPlay == 0) {
@@ -111,7 +82,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
 
 <body>
   <?php include 'header.php'; ?>
-  <section class="container py-lg-5">>
+  <section class="container py-lg-5">
     <!--User table-->
     <h1 class="slideInDown animated">Here are the Users daily logs</h1>
     <div class="form-style-5">
@@ -131,7 +102,6 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-
           </div>
         </div>
         <form method="POST" action="Export_Excel.php" enctype="multipart/form-data">
@@ -175,8 +145,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
                   <select class="card_sel" name="card_sel" id="card_sel">
                     <option value="0">All Users</option>
                     <?php
-                    require 'connectDB.php';
-                    $sql = "SELECT * FROM users WHERE add_card=1 ORDER BY id ASC";
+                    $sql = "SELECT * FROM users WHERE `add_card` ='1' ORDER BY id ASC";
                     $result = mysqli_stmt_init($conn);
                     if (!mysqli_stmt_prepare($result, $sql)) {
                       echo '<p class="error">SQL Error</p>';
@@ -197,8 +166,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
                   <select class="dev_sel" name="dev_sel" id="dev_sel">
                     <option value="0">All Departments</option>
                     <?php
-                    require 'connectDB.php';
-                    $sql = "SELECT * FROM devices ORDER BY device_dep ASC";
+                    $sql = "SELECT * FROM `devices` ORDER BY `device_dep` ASC";
                     $result = mysqli_stmt_init($conn);
                     if (!mysqli_stmt_prepare($result, $sql)) {
                       echo '<p class="error">SQL Error</p>';

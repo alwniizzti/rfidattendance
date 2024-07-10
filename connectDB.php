@@ -1,4 +1,6 @@
 <?php
+session_start();
+date_default_timezone_set('Asia/Kuala_Lumpur');
 /* Database connection settings */
 $servername = "localhost";
 $username = "root";        //put your phpmyadmin username.(default is "root")

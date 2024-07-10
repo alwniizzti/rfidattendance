@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 require('connectDB.php');
 
 if (isset($_POST['dev_add'])) {
