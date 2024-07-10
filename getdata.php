@@ -70,19 +70,71 @@ if (isset($_GET['card_uid']) && isset($_GET['device_token'])) {
                                     else {
                                         $sql = "UPDATE users_logs SET timeout=?, card_out=1 WHERE card_uid=? AND checkindate=? AND card_out=0";
                                         $result = mysqli_stmt_init($conn);
+
                                         if (!mysqli_stmt_prepare($result, $sql)) {
                                             echo "SQL_Error_insert_logout1";
                                             exit();
                                         } else {
                                             mysqli_stmt_bind_param($result, "sss", $t, $card_uid, $d);
                                             mysqli_stmt_execute($result);
-
+                                            // update status to 1
+                                            $sql_update = "UPDATE `users_logs` SET `status` = '0' WHERE `status` = '1' AND card_uid='$card_uid' AND checkindate='$d' AND card_out='1'";
+                                            $conn->query($sql_update);
                                             echo "logout" . $Uname;
                                             exit();
                                         }
                                     }
                                 }
                             } else {
+                                $Uname = $row['username'];
+                                $Number = $row['serialnumber'];
+                                $sql = "SELECT * FROM `users_logs_reject` WHERE card_uid=? AND checkindate=? AND card_out=0";
+                                $result = mysqli_stmt_init($conn);
+                                if (!mysqli_stmt_prepare($result, $sql)) {
+                                    echo "SQL_Error_Select_logs";
+                                    exit();
+                                } else {
+                                    mysqli_stmt_bind_param($result, "ss", $card_uid, $d);
+                                    mysqli_stmt_execute($result);
+                                    $resultl = mysqli_stmt_get_result($result);
+                                    //*****************************************************
+                                    //Login
+                                    if (!$row = mysqli_fetch_assoc($resultl)) {
+
+                                        $sql = "INSERT INTO users_logs_reject (username, serialnumber, card_uid, device_uid, device_dep, checkindate, timein, timeout) VALUES (? ,?, ?, ?, ?, ?, ?, ?)";
+                                        $result = mysqli_stmt_init($conn);
+                                        if (!mysqli_stmt_prepare($result, $sql)) {
+                                            echo "SQL_Error_Select_login1";
+                                            exit();
+                                        } else {
+                                            $timeout = "00:00:00";
+                                            mysqli_stmt_bind_param($result, "sdssssss", $Uname, $Number, $card_uid, $device_uid, $device_dep, $d, $t, $timeout);
+                                            mysqli_stmt_execute($result);
+
+                                            echo "login Reject: " . $Uname;
+                                            exit();
+                                        }
+                                    }
+                                    //*****************************************************
+                                    //Logout
+                                    else {
+                                        $sql = "UPDATE users_logs_reject SET timeout=?, card_out=1 WHERE card_uid=? AND checkindate=? AND card_out=0";
+                                        $result = mysqli_stmt_init($conn);
+
+                                        if (!mysqli_stmt_prepare($result, $sql)) {
+                                            echo "SQL_Error_insert_logout1";
+                                            exit();
+                                        } else {
+                                            mysqli_stmt_bind_param($result, "sss", $t, $card_uid, $d);
+                                            mysqli_stmt_execute($result);
+                                            // update status to 1
+                                            $sql_update = "UPDATE `users_logs_reject` SET `status` = '0' WHERE `status` = '1' AND card_uid='$card_uid' AND checkindate='$d' AND card_out='1'";
+                                            $conn->query($sql_update);
+                                            echo "logout Reject: " . $Uname;
+                                            exit();
+                                        }
+                                    }
+                                }
                                 echo "Not Allowed!";
                                 exit();
                             }

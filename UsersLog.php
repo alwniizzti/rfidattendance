@@ -59,6 +59,10 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
                 var audio = new Audio('sound/accept.mp3');
                 audio.play();
               }
+              if (response.total_rejected > 0) {
+                var audio = new Audio('sound/reject.mp3');
+                audio.play();
+              }
             } else {
               statusPlay = 0;
               document.getElementById("sound").innerHTML = "Play";
