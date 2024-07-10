@@ -1,87 +1,6 @@
-<?php
-require 'connectDB.php';
-if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
-  header("location: login.php");
-}
-?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Users Logs</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="icon" type="image/png" href="icon/ok_check.png"> -->
-  <link rel="stylesheet" type="text/css" href="css/userslog.css">
-  <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script type="text/javascript" src="js/bootbox.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script src="js/user_log.js"></script>
-  <script>
-    $(window).on("load resize ", function() {
-      var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-      $('.tbl-header').css({
-        'padding-right': scrollWidth
-      });
-    }).resize();
-  </script>
-  <script>
-    var statusPlay = 0;
-    $(document).ready(function() {
-      $.ajax({
-        url: "user_log_up.php",
-        type: 'POST',
-        data: {
-          'select_date': 1,
-        }
-      }).done(function(data) {
-        $('#userslog').html(data);
-      });
-
-      setInterval(function() {
-        $.ajax({
-          url: "user_log_up.php",
-          type: 'POST',
-          data: {
-            'select_date': 0,
-          }
-        }).done(function(data) {
-          $('#userslog').html(data);
-        });
-        $.ajax({
-          url: "user-log-request.php",
-          type: 'POST',
-          datatype: 'json',
-          success: function(response) {
-            if (statusPlay == 1) {
-              if (response.total > 0) {
-                var audio = new Audio('sound/accept.mp3');
-                audio.play();
-              }
-            } else {
-              statusPlay = 0;
-              document.getElementById("sound").innerHTML = "Play";
-            }
-          }
-        });
-      }, 1000);
-    });
-
-    function play() {
-      if (statusPlay == 0) {
-        statusPlay = 1;
-        document.getElementById("sound").innerHTML = "Stop";
-      } else {
-        statusPlay = 0;
-        document.getElementById("sound").innerHTML = "Play";
-      }
-    }
-  </script>
-</head>
-
-<body>
-  <?php include 'header.php'; ?>
+<?php $title = 'Users Log'; ?>
+<?php include_once 'layout/header.php'; ?>
+<main>
   <section class="container py-lg-5">
     <!--User table-->
     <h1 class="slideInDown animated">Here are the Users daily logs</h1>
@@ -196,13 +115,10 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
         </form>
       </div>
     </div>
-    </div>
     <!-- //Log filter -->
     <div class="slideInRight animated">
       <div id="userslog"></div>
     </div>
   </section>
-  </main>
-</body>
-
-</html>
+</main>
+<?php include_once 'layout/footer.php'; ?>

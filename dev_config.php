@@ -1,7 +1,5 @@
 <?php 
-
-require('connectDB.php');
-
+include_once 'config/db.php';
 if (isset($_POST['dev_add'])) {
 
     $dev_name = $_POST['dev_name'];

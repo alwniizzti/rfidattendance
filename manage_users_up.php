@@ -1,6 +1,6 @@
 <?php
 //Connect to database
-require 'connectDB.php';
+require 'config/db.php';
 ?>
 <div class="table-responsive-sm" style="max-height: 870px;">
   <table class="table">

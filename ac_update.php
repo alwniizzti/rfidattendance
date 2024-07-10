@@ -1,7 +1,5 @@
 <?php 
-
-require('connectDB.php');
-
+include_once 'config/db.php';
 if (isset($_POST['update'])) {
 
     $useremail = $_SESSION['Admin-email'];

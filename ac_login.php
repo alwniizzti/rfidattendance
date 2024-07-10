@@ -1,7 +1,6 @@
 <?php
-
+require_once "config/db.php";
 if (isset($_POST["login"])) {
-    require "connectDB.php";
     $Usermail = $_POST["email"];
     $Userpass = $_POST["pwd"];
     if (empty($Usermail) || empty($Userpass)) {

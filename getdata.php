@@ -1,6 +1,6 @@
 <?php
 //Connect to database
-require 'connectDB.php';
+require_once 'config/db.php';
 $d = date("Y-m-d");
 $t = date("H:i:s");
 

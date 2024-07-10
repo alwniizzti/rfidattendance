@@ -1,6 +1,6 @@
 <?php
 //Connect to database
-require 'connectDB.php';
+require_once 'config/db.php';
 if (!isset($_SESSION['Admin-name'])) {
   header("location: login.php");
 }

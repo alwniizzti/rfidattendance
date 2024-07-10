@@ -1,6 +1,5 @@
 <?php
-
-require 'connectDB.php';
+require_once 'config/db.php';
 header('Content-Type: application/json');
 $sql_user_log = "SELECT * FROM `users_logs` WHERE `status`= '0'";
 $result = $conn->query($sql_user_log);

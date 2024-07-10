@@ -1,6 +1,6 @@
 <?php  
 //Connect to database
-require 'connectDB.php';
+require_once 'config/db.php';
 
 //Add user
 if (isset($_POST['Add'])) {
