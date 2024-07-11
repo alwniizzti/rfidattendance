@@ -55,10 +55,10 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
           datatype: 'json',
           success: function(response) {
             if (statusPlay == 1) {
-              if (response.total > 0) {
-                var audio = new Audio('sound/accept.mp3');
-                audio.play();
-              }
+              // if (response.total > 0) {
+              //   var audio = new Audio('sound/accept.mp3');
+              //   audio.play();
+              // }
               if (response.total_rejected > 0) {
                 var audio = new Audio('sound/reject.mp3');
                 audio.play();
@@ -69,7 +69,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
             }
           }
         });
-      }, 1000);
+      }, 5000);
     });
 
     function play() {
