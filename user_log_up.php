@@ -10,7 +10,6 @@ require 'connectdB.php';
         <th>Name</th>
         <th>Serial Number</th>
         <th>Card UID</th>
-        <th>Device Dep</th>
         <th>Date</th>
         <th>Time In</th>
         <th>Time Out</th>
@@ -104,7 +103,6 @@ require 'connectdB.php';
               <td><?= $row['username']; ?></td>
               <td><?= $row['serialnumber']; ?></td>
               <td><?= $row['card_uid']; ?></td>
-              <td><?= $row['device_dep']; ?></td>
               <td><?= $row['checkindate']; ?></td>
               <td><?= $row['timein']; ?></td>
               <td><?= $row['timeout']; ?></td>

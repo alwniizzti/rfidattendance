@@ -59,11 +59,13 @@
 	?>
 	<div class="topnav" id="myTopnav">
 		<a href="index.php">Users</a>
-		<a href="ManageUsers.php">Manage Users</a>
+		<?php if (isset($_SESSION['Admin-name'])) : ?>
+			<a href="ManageUsers.php">Manage Users</a>
+		<?php endif; ?>
 		<a href="UsersLog.php">Users Log</a>
 		<a href="UsersLog-history.php">Users Log History</a>
-		<a href="devices.php">Devices</a>
 		<?php if (isset($_SESSION['Admin-name'])) : ?>
+			<a href="devices.php">Devices</a>
 			<a href="guard.php">Security</a>
 			<a href="#" data-toggle="modal" data-target="#admin-account"><?php echo $_SESSION['Admin-name']; ?></a>
 			<a href="logout.php">Log Out</a>

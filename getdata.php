@@ -139,10 +139,14 @@ if (isset($_GET['card_uid']) && isset($_GET['device_token'])) {
                                 exit();
                             }
                         } else if ($row['add_card'] == 0) {
+                            $sql_card_reject = "INSERT INTO `card_reject` (card_uid) VALUES('$card_uid')";
+                            $conn->query($sql_card_reject);
                             echo "Not registerd!";
                             exit();
                         }
                     } else {
+                        $sql_card_reject = "INSERT INTO `card_reject` (card_uid) VALUES('$card_uid')";
+                        $conn->query($sql_card_reject);
                         echo "Not found!";
                         exit();
                     }
@@ -233,6 +237,8 @@ if (isset($_GET['card_uid']) && isset($_GET['device_token'])) {
                 }
             }
         } else {
+            $sql_card_reject = "INSERT INTO `card_reject` (card_uid) VALUES('$card_uid')";
+            $conn->query($sql_card_reject);
             echo "Invalid Device!";
             exit();
         }
