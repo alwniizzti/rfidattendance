@@ -8,7 +8,7 @@ require 'connectdB.php';
       <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Serial Number</th>
+        <th>Matric Number</th>
         <th>Card UID</th>
         <th>Date</th>
         <th>Time In</th>

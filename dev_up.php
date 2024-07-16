@@ -6,7 +6,7 @@
 		<thead>
 	      <tr>
 	        <th>De.Name</th>
-	        <th>De.Department</th>
+	        <th>De.Block</th>
 	        <th>De.UID</th>
 	        <th>De.Date</th>
 	        <th>De.Mode</th>
@@ -34,7 +34,7 @@
 					      	<input type="radio" id="'.$row["id"].'-one" name="'.$row["id"].'" class="mode_sel" data-id="'.$row["id"].'" value="0" '.$radio1.'/>
 					                    <label for="'.$row["id"].'-one">Enrollment</label>
 		                    <input type="radio" id="'.$row["id"].'-two" name="'.$row["id"].'" class="mode_sel" data-id="'.$row["id"].'" value="1" '.$radio2.'/>
-					                    <label for="'.$row["id"].'-two">Attendance</label>
+					                    <label for="'.$row["id"].'-two">Access Log</label>
 					                    </div>';
 
 					    	echo '<tr>

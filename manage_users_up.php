@@ -9,9 +9,9 @@ require 'connectDB.php';
         <th>Card UID</th>
         <th>Name</th>
         <th>Gender</th>
-        <th>S.No</th>
+        <th>Matric Number</th>
         <th>Date</th>
-        <th>Department</th>
+        <th>Block</th>
       </tr>
     </thead>
     <tbody class="table-secondary">

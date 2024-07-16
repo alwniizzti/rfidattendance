@@ -31,7 +31,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
   <?php include 'header.php'; ?>
   <main>
     <section>
-      <h1 class="slideInDown animated">Here are all the Users</h1>
+      <h1 class="slideInDown animated">Users Information</h1>
       <!--User table-->
       <div class="table-responsive slideInRight animated" style="max-height: 400px;">
         <table class="table">
@@ -42,7 +42,6 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
               <th>Gender</th>
               <th>Card UID</th>
               <th>Date</th>
-              <th>Device</th>
             </tr>
           </thead>
           <tbody class="table-secondary">
@@ -67,7 +66,6 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
                     <TD><?php echo $row['gender']; ?></TD>
                     <TD><?php echo $row['card_uid']; ?></TD>
                     <TD><?php echo $row['user_date']; ?></TD>
-                    <TD><?php echo $row['device_dep']; ?></TD>
                   </TR>
             <?php
                 }

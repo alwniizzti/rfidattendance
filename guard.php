@@ -56,7 +56,6 @@ $i = 1;
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody class="table-secondary">
@@ -65,7 +64,6 @@ $i = 1;
               <td><?= $i++ ?></td>
               <td><?= $row['guard_name'] ?></td>
               <td><?= $row['guard_email'] ?></td>
-              <td></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

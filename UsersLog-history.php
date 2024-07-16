@@ -88,7 +88,7 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
     <?php include 'header.php'; ?>
     <section class="container py-lg-5">
         <!--User table-->
-        <h1 class="slideInDown animated">Here are the Users daily logs</h1>
+        <h1 class="slideInDown animated">Users logs history</h1>
         <div class="form-style-5">
             <form method="GET" action="">
                 <input type="date" class="form-control" name="date" max="<?= date('Y-m-d') ?>" value="<?= $_GET['date'] ?? '' ?>">
@@ -103,9 +103,8 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Serial Number</th>
+                            <th>Matric Number</th>
                             <th>Card UID</th>
-                            <th>Device Dep</th>
                             <th>Date</th>
                             <th>Time In</th>
                             <th>Time Out</th>
@@ -136,7 +135,6 @@ if (!isset($_SESSION['Admin-name']) && !isset($_SESSION['Guard-name'])) {
                                         <td><?= $row['username']; ?></td>
                                         <td><?= $row['serialnumber']; ?></td>
                                         <td><?= $row['card_uid']; ?></td>
-                                        <td><?= $row['device_dep']; ?></td>
                                         <td><?= $row['checkindate']; ?></td>
                                         <td><?= $row['timein']; ?></td>
                                         <td><?= $row['timeout']; ?></td>

@@ -78,8 +78,8 @@ if (!isset($_SESSION['Admin-name'])) {
 							<div class="modal-body">
 								<label for="User-mail"><b>Device Name:</b></label>
 								<input type="text" name="dev_name" id="dev_name" placeholder="Device Name..." required /><br>
-								<label for="User-mail"><b>Device Department:</b></label>
-								<input type="text" name="dev_dep" id="dev_dep" placeholder="Device Department..." required /><br>
+								<label for="User-mail"><b>Device Block:</b></label>
+								<input type="text" name="dev_dep" id="dev_dep" placeholder="Device Block..." required /><br>
 							</div>
 							<div class="modal-footer">
 								<button type="button" name="dev_add" id="dev_add" class="btn btn-success">Create new Device</button>
